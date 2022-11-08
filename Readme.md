@@ -16,7 +16,11 @@ sudo apt-get install -y nodejs
 - [Buffer](https://nodejs.org/dist/latest-v18.x/docs/api/buffer.html)  
 - [HTTP/HTTPS](https://nodejs.org/dist/latest-v18.x/docs/api/http.html)
 - [Socket](https://nodejs.org/dist/latest-v18.x/docs/api/net.html#class-netsocket)
+- [JSDOM](https://github.com/jsdom/jsdom)
 
+- ExpressJS (Server Web/Routing)
+- Sequelize (ORM => BDD) / Postgresql
+- JWT (Authentification)
 
 ## Autres infos
 [Netflix Architecture](https://dev.to/gbengelebs/netflix-system-design-how-netflix-onboards-new-content-2dlb)
@@ -24,3 +28,59 @@ sudo apt-get install -y nodejs
 Grosses failles Web:
 - Failles XSS => sanitizer le code produit
 - Failles Injection SQL => Utiliser des requêtes préparées
+
+# RESTFULL
+
+## Format d'échange
+**JSON**   
+Headers:
+- Content-Type: application/json
+- Authorization: Bearer \<token\>
+
+## Paths
+**Collection**: /<resource_name>s
+**Item**: /<resource_name>s/:id
+**SubCollection**: /<resource_name>s/:id/<subresource_name>s
+
+Exemple: User
+**Collection**: /users => [{id:1},{id:3}]
+**Item**: /users/3 => User 3
+**SubCollection**: /users/3/comments
+
+## HTTP Verbs
+#### Collection
+**GET** : Récupérer la collection d'items
+**POST** : Créer un item dans la collection
+
+#### Item
+**GET** : Récupérer un item
+**PUT** : Remplacer un item (= update)
+**DELETE** : Supprimer un item
+
+#### SubCollection
+**GET** : Récupère un collection d'items associé à une ressource
+
+## Http Codes
+#### Collection
+**GET** : Récupérer la collection d'items
+- 200 : OK
+
+**POST** : Créer un item dans la collection
+- 201 : CREATED
+- 400 : Bad Request => Le format attendu n'est pas correct (xml à la place de json)
+- 422 : Unprocessable Entity => Format OK, data corrompu (ex. number dans un champs email)
+
+#### Item
+**GET** : Récupérer un item
+- 200 : OK
+- 404 : Not Found
+  
+**PUT** : Remplacer un item (= update)
+- 200 : OK
+- 400 : Bad Request => Le format attendu n'est pas correct (xml à la place de json)
+- 422 : Unprocessable Entity => Format OK, data corrompu (ex. number dans un champs email)
+- 404 : Not Found
+
+**DELETE** : Supprimer un item
+- 204 : No Content
+- 404 : Not Found

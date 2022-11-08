@@ -27,16 +27,14 @@ const req = https.request(
         // Format data
         data = data.toString();
         data = JSON.parse(data);
-        console.log(data);
-        // process data
-        console.log(
-          Object.values(data[0]).map((c) => ({
-            id: c.id_challenge,
-            title: c.titre,
-          }))
-        );
       }
-
+      // process data
+      console.log(
+        Object.values(data[0]).map((c) => ({
+          id: c.id_challenge,
+          title: c.titre,
+        }))
+      );
       console.log("End of request");
     });
   }
