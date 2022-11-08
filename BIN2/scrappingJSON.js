@@ -1,7 +1,7 @@
 const https = require("https");
 
 const req = https.request(
-  "https://api.www.root-me.org/challenges",
+  "https://api.www.root-me.org/challenges?debut_challenges=50",
   {
     method: "GET",
     headers: {
@@ -12,7 +12,33 @@ const req = https.request(
   (res) => {
     console.log(res.statusCode);
 
-    console.log(res);
+    let bufferList = [];
+    res.on("data", (data) => {
+      bufferList.push(data);
+    });
+
+    res.on("end", () => {
+      let data = Buffer.concat(
+        bufferList,
+        bufferList.reduce((acc, item) => acc + item.length, 0)
+      );
+
+      if (/application\/json/.test(res.headers["content-type"])) {
+        // Format data
+        data = data.toString();
+        data = JSON.parse(data);
+        console.log(data);
+        // process data
+        console.log(
+          Object.values(data[0]).map((c) => ({
+            id: c.id_challenge,
+            title: c.titre,
+          }))
+        );
+      }
+
+      console.log("End of request");
+    });
   }
 );
 
