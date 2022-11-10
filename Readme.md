@@ -12,11 +12,13 @@ sudo apt-get install -y nodejs
 
 ## Fonctionnalités
 
-- [File system](https://nodejs.org/dist/latest-v18.x/docs/api/fs.html)
-- [Buffer](https://nodejs.org/dist/latest-v18.x/docs/api/buffer.html)  
-- [HTTP/HTTPS](https://nodejs.org/dist/latest-v18.x/docs/api/http.html)
-- [Socket](https://nodejs.org/dist/latest-v18.x/docs/api/net.html#class-netsocket)
-- [JSDOM](https://github.com/jsdom/jsdom)
+- [File system](https://nodejs.org/dist/latest-v18.x/docs/api/fs.html) => Gestion du système de fichiers
+- [Buffer](https://nodejs.org/dist/latest-v18.x/docs/api/buffer.html) => Lecture de données (réseau/fichier)
+- [Path](https://nodejs.org/dist/latest-v18.x/docs/api/path.html) => Gestion des chemins (concaténation/absolute_path/...)
+- [Child process](https://nodejs.org/dist/latest-v18.x/docs/api/child_process.html) => Création de sous-process (node/shell/...) ("multi-threading")
+- [HTTP/HTTPS](https://nodejs.org/dist/latest-v18.x/docs/api/http.html) => Gestion des calls HTTP/S (client/serveur)
+- [Socket](https://nodejs.org/dist/latest-v18.x/docs/api/net.html#class-netsocket) => Sous-objet permettant de lire la data des calls réseaux (client/serveur)
+- [JSDOM](https://github.com/jsdom/jsdom) => Parsing d'un contenu HTML pour utiliser l'API DOM
 
 - ExpressJS (Server Web/Routing)
 - Sequelize (ORM => BDD) / Postgresql
@@ -28,6 +30,16 @@ sudo apt-get install -y nodejs
 Grosses failles Web:
 - Failles XSS => sanitizer le code produit
 - Failles Injection SQL => Utiliser des requêtes préparées
+
+## Exemples
+
+**BIN1**: 
+- Lecture d'un CSV et Ajout en BDD du non-existant
+- *fileSearch*: Recherche de fichiers par nom/type/date + recherche de duplicas
+  
+**BIN2**:
+- Lecture d'un CSV et Ajout en BDD du non-existant
+- *markdownParser*: Parsing basique d'un fichier markdow + conversion en fichier HTML
 
 # RESTFULL
 
