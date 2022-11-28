@@ -1,8 +1,9 @@
 const fs = require("node:fs/promises");
 const fsSync = require("node:fs");
 const path = require("node:path");
+const ProgressBar = require("../../Bonus/ProgressBar");
 const constants = fsSync.constants;
-
+let bar;
 const rootPath = "./";
 const filters = {
   name: undefined,
@@ -93,6 +94,7 @@ async function searchDuplicates(files) {
           .slice(oIndex + 1)
           .map((to) => (checkDuplicate(origin, to) ? to : undefined));
         results = results.filter((r) => r !== undefined);
+        bar.setValue(oIndex);
         return results.length
           ? {
               origin,
@@ -113,21 +115,25 @@ function checkDuplicate(file1, file2) {
 
   const fo = fsSync.openSync(file1.name, "r");
   const ft = fsSync.openSync(file2.name, "r");
-  let oBlock;
-  while ((oBlock = fo.read()).bytesRead !== 0) {
-    const tBlock = ft.read();
+  let oBlock = Buffer.alloc(16384);
+  let bytesRead;
+  while ((bytesRead = fsSync.readSync(fo, oBlock)) !== 0) {
+    const tBlock = Buffer.alloc(16384);
+    fsSync.readSync(ft, tBlock);
     // If origin Buffer differs from targetBuffer, break;
-    if (oBlock.buffer.compare(tBlock.buffer) !== 0) break;
+    if (oBlock.compare(tBlock) !== 0) break;
   }
-  fo.close();
-  ft.close();
+  fsSync.closeSync(fo);
+  fsSync.closeSync(ft);
   // If reach end of origin file, it's a match else return false
-  return oBlock.bytesRead === 0;
+  return bytesRead === 0;
 }
 
 (async () => {
   const files = (await searchFiles(rootPath)).flat(Infinity);
   console.log("nbFiles", files.length);
+  bar = new ProgressBar(30, files.length);
+  bar.start();
   const duplicates = await searchDuplicates(files);
   console.log(
     //files,
