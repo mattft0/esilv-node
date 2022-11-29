@@ -57,7 +57,7 @@ Headers:
 Exemple: User
 **Collection**: /users => [{id:1},{id:3}]
 **Item**: /users/3 => User 3
-**SubCollection**: /users/3/comments
+**SubCollection**: /users/3/comments <=> /comments?user_id=3
 
 ## HTTP Verbs
 #### Collection
