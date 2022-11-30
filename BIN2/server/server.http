@@ -1,0 +1,62 @@
+GET http://localhost:3000/test
+###
+GET http://localhost:3000/hello
+###
+POST http://localhost:3000/hello
+### Put hello
+PUT http://localhost:3000/hello/1
+### PUT hello wrong format
+PUT http://localhost:3000/hello/1
+### PUt hello wrong field value
+PUT http://localhost:3000/hello/1
+### PUt hello not authenticated
+PUT http://localhost:3000/hello/1
+### Delete hello
+DELETE http://localhost:3000/hello/karl
+### Delete hello not exists
+DELETE http://localhost:3000/hello/not-exists
+###################################
+###
+###        Users routes
+###
+###################################
+GET http://localhost:3000/users
+###
+GET http://localhost:3000/users/1
+###
+POST http://localhost:3000/users
+###
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name": "Test",
+    "email": "t@t.com"
+}
+###
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name": "Test",
+    "email": "t@t.com",
+    "password": "12456"
+}
+###
+PUT http://localhost:3000/users/1
+###
+PUT http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "email": ""
+}
+###
+PUT http://localhost:3000/users/1
+Content-Type: application/json
+
+{
+    "email": "tt@test.com"
+}
+###
+DELETE http://localhost:3000/users/1
