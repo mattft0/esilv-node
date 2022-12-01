@@ -1,24 +1,23 @@
 const express = require("express");
+const checkRequestFormat = require("./middlewares/checkRequestFormat");
+const errorHandler = require("./middlewares/errorHandler");
 const userRouter = require("./routes/users");
+const helloRouter = require("./routes/hello");
+const securityRouter = require("./routes/security");
+require("./models/db");
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
-
-/**
- * Exemple Hello
- */
-app.get("/hello", (request, response) => {
-  response.send("coucou");
-});
-app.post("/hello", (req, res) => res.send("POST coucou"));
-app.put("/hello/:id", (req, res) => res.send("PUT coucou " + req.params.id));
-app.delete("/hello/:titi", (req, res) =>
-  res.send("DELETE coucou " + req.params.titi)
-);
+app.use(checkRequestFormat);
 app.use(express.json());
+
+app.use(securityRouter);
+app.use(helloRouter);
 app.use(userRouter);
 
+app.use(errorHandler);
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log("Server is listening on port " + PORT);
 });

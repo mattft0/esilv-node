@@ -20,9 +20,10 @@ sudo apt-get install -y nodejs
 - [Socket](https://nodejs.org/dist/latest-v18.x/docs/api/net.html#class-netsocket) => Sous-objet permettant de lire la data des calls réseaux (client/serveur)
 - [JSDOM](https://github.com/jsdom/jsdom) => Parsing d'un contenu HTML pour utiliser l'API DOM
 
-- ExpressJS (Server Web/Routing)
-- Sequelize (ORM => BDD) / Postgresql
-- JWT (Authentification)
+- [ExpressJS](https://expressjs.com/) (Server Web/Routing)
+- [Sequelize](https://sequelize.org/docs/v6/) (ORM => BDD) / Postgresql
+- [JWT](https://jwt.io/) (Authentification)
+- OAUTH2 (Authentification)
 
 ## Autres infos
 [Netflix Architecture](https://dev.to/gbengelebs/netflix-system-design-how-netflix-onboards-new-content-2dlb)
