@@ -1,3 +1,8 @@
 const { connection } = require("./models");
 
-connection.sync().then(() => console.log("Database migrated"));
+connection
+  .sync({
+    alter: true,
+  })
+  .then(() => console.log("Database migrated"))
+  .then(() => connection.close());

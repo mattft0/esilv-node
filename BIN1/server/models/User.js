@@ -23,6 +23,11 @@ User.init(
         len: [1],
       },
     },
+    role: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "USER",
+    },
   },
   {
     sequelize: connection,

@@ -9,7 +9,10 @@ DELETE http://localhost:3000/hello/karl
 
 ### 
 GET http://localhost:3000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0bmFtZSI6ImNvdWNvdSIsImZpcnN0bmFtZSI6ImNvdWNvdSIsImlkIjoyMiwiaWF0IjoxNjY5ODkwNzEyfQ.cHRzc0cOOqsluuw_uTSAnfT4SzyYOCXbz_gDmxOeO-Q
+# User 22 ADMIN
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0bmFtZSI6ImFoYWgiLCJmaXJzdG5hbWUiOiJjb3Vjb3UiLCJyb2xlIjoiQURNSU4iLCJpZCI6MjIsImlhdCI6MTY3MDIyNzM2OX0.QlFqZ9RwG4NdwzTUx6WGXVuMXpLJ4Blyvhbq4K4lKYo
+# User USER
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0bmFtZSI6bnVsbCwiZmlyc3RuYW1lIjpudWxsLCJyb2xlIjoiVVNFUiIsImlkIjozMCwiaWF0IjoxNjcwMjI4MzQwfQ.KuuTgKvdAKtrjJByCC0Xw-rcUnZ8UYsWeSaf4XSoXkc
 ###
 POST http://localhost:3000/users
 Content-Type: application/xml
@@ -26,7 +29,7 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-  "email": "karl5@test.com",
+  "email": "karl6@test.com",
   "password": "test"
 }
 ### 
@@ -34,10 +37,10 @@ GET http://localhost:3000/users/1
 ###
 PUT http://localhost:3000/users/22
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0bmFtZSI6ImNvdWNvdSIsImZpcnN0bmFtZSI6ImNvdWNvdSIsImlkIjoyMiwiaWF0IjoxNjY5ODkwNzEyfQ.cHRzc0cOOqsluuw_uTSAnfT4SzyYOCXbz_gDmxOeO-Q
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0bmFtZSI6ImFoYWgiLCJmaXJzdG5hbWUiOiJjb3Vjb3UiLCJyb2xlIjoiQURNSU4iLCJpZCI6MjIsImlhdCI6MTY3MDIyNzM2OX0.QlFqZ9RwG4NdwzTUx6WGXVuMXpLJ4Blyvhbq4K4lKYo
     
 {
-  "lastname": "ahah"
+  "role": "ADMIN"
 }
 ### 
 DELETE http://localhost:3000/users/1
@@ -47,6 +50,6 @@ POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-  "email": "karl4@test.com",
-  "password": "coucou"
+  "email": "karl6@test.com",
+  "password": "test"
 }

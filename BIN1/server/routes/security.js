@@ -21,6 +21,7 @@ router.post("/login", async (req, res) => {
           {
             lastname: user.lastname,
             firstname: user.firstname,
+            role: user.role,
             id: user.id,
           },
           SECRET
