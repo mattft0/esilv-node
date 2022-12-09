@@ -22,6 +22,14 @@ User.init(
         len: [1],
       },
     },
+    role: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "USER",
+      validate: {
+        isIn: ["USER", "ADMIN"],
+      },
+    },
   },
   {
     sequelize: connection,

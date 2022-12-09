@@ -1,27 +1,31 @@
 const { Router } = require("express");
+const ForbiddenError = require("../errors/ForbiddenError");
 const checkAuth = require("../middlewares/checkAuth");
+const checkRole = require("../middlewares/checkRole");
 const { User } = require("../models");
 
 const router = new Router();
 
 // Get collection
-router.get("/users", checkAuth, (req, res) => {
-  User.findAll({
-    where: req.query,
-    attributes: { exclude: ["password"] },
-  }).then((data) => res.json(data));
-});
+router.get(
+  "/users",
+  checkAuth,
+  checkRole({ minRole: checkRole.ROLES.ADMIN }),
+  (req, res) => {
+    User.findAll({
+      where: req.query,
+      attributes: { exclude: ["password"] },
+    }).then((data) => res.json(data));
+  }
+);
 
 // Créer un user
-router.post("/users", (req, res) => {
+router.post("/users", (req, res, next) => {
   const user = new User(req.body);
   user
     .save()
     .then((data) => res.status(201).json(data))
-    .catch((error) => {
-      // manage error
-      res.sendStatus(422);
-    });
+    .catch(next);
 });
 
 // Récupérer un user
@@ -37,8 +41,8 @@ router.get("/users/:id", async (req, res) => {
 });
 
 // Update un user
-router.put("/users/:id", checkAuth, (req, res) => {
-  if (req.user.id !== parseInt(req.params.id)) return res.sendStatus(403);
+router.put("/users/:id", checkAuth, (req, res, next) => {
+  if (req.user.id !== parseInt(req.params.id)) throw new ForbiddenError();
 
   User.update(req.body, {
     where: { id: parseInt(req.params.id) },
@@ -50,15 +54,12 @@ router.put("/users/:id", checkAuth, (req, res) => {
         attributes: { exclude: "password" },
       }).then((user) => res.json(user));
     })
-    .catch((error) => {
-      // manage error
-      res.sendStatus(422);
-    });
+    .catch(next);
 });
 
 // Delete un utilisateur
 router.delete("/users/:id", checkAuth, (req, res) => {
-  if (req.user.id !== parseInt(req.params.id)) return res.sendStatus(403);
+  if (req.user.id !== parseInt(req.params.id)) throw new ForbiddenError();
   User.destroy({
     where: {
       id: parseInt(req.params.id),

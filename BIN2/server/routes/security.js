@@ -15,13 +15,14 @@ router.post("/login", async (req, res) => {
   if (!user) return res.sendStatus(401);
   if (!(await bcrypt.compare(req.body.password, user.password)))
     return res.sendStatus(401);
-
+  console.log(user.role);
   res.json({
     token: jwt.sign(
       {
         firstname: user.firstname,
         lastname: user.lastname,
         id: user.id,
+        role: user.role,
       },
       SECRET
     ),

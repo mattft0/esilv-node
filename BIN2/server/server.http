@@ -23,7 +23,7 @@ DELETE http://localhost:3000/hello/not-exists
 GET http://localhost:3000/users
 ###
 GET http://localhost:3000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJjb3Vjb3UzIiwibGFzdG5hbWUiOiJjb3Vjb3UzIiwiaWQiOjQsImlhdCI6MTY3MDMyMTkxNH0.MGarOxVFmG44X1FAuU8bGxHp-XczFqRh8eLKmf8uB6o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOm51bGwsImxhc3RuYW1lIjpudWxsLCJpZCI6MSwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjcwNTc1NTM0fQ.fO-LQDvJsyAtaj0mY4HwHwKilJat__ydo3JY260kz9s
 ###
 GET http://localhost:3000/users/1
 ###
@@ -44,7 +44,7 @@ Content-Type: application/json
 {
     "name": "Test",
     "email": "t@t.com",
-    "password": "12456"
+    "password": ""
 }
 ###
 PUT http://localhost:3000/users/1
@@ -56,12 +56,12 @@ Content-Type: application/json
     "email": ""
 }
 ###
-PUT http://localhost:3000/users/4
+PUT http://localhost:3000/users/1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJjb3Vjb3UzIiwibGFzdG5hbWUiOiJjb3Vjb3UzIiwiaWQiOjQsImlhdCI6MTY3MDMyMTkxNH0.MGarOxVFmG44X1FAuU8bGxHp-XczFqRh8eLKmf8uB6o
 
 {
-    "firstname": "coucou4"
+    "password": ""
 }
 ###
 DELETE http://localhost:3000/users/1
@@ -71,5 +71,5 @@ Content-Type: application/json
 
 {
     "email": "tt@t.com",
-    "password": "coucou3"
+    "password": "test"
 }
