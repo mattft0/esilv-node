@@ -6,6 +6,7 @@ const roles = {
 module.exports = function (roleToCheck, options = {}) {
   return function (req, res, next) {
     const user = req.user;
+    const rolesHierarchy = Object.keys(roles);
 
     if (req.body && options.securedFields) {
       const securedFieldsFound = Object.keys(req.body).filter((field) =>
@@ -31,7 +32,6 @@ module.exports = function (roleToCheck, options = {}) {
     }
     if (options.anonymous) return next();
     if (!user) return res.sendStatus(403);
-    const rolesHierarchy = Object.keys(roles);
     // If no securedFields, check globally the user role
     if (
       rolesHierarchy.indexOf(user.role) >= rolesHierarchy.indexOf(roleToCheck)
