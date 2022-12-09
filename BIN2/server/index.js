@@ -1,17 +1,10 @@
 const express = require("express");
 const userRouter = require("./routes/users");
+const securityRouter = require("./routes/security");
+const checkRequestFormat = require("./middlewares/checkRequestFormat");
 const app = express();
 
-app.use((req, res, next) => {
-  console.log(req);
-  if (req.method === "POST" || req.method === "PUT") {
-    if (!req.headers["content-type"]?.startsWith("application/json")) {
-      res.sendStatus(400);
-      return;
-    }
-  }
-  next();
-});
+app.use(checkRequestFormat);
 
 app.use(express.json());
 
@@ -41,6 +34,7 @@ app.delete("/hello/:toto", (req, res) => {
     dest: id,
   });
 });
+app.use(securityRouter);
 
 app.use(userRouter);
 
